@@ -45,7 +45,13 @@ export default defineComponent({
             })
             if (result.data.result == 'success') {
                 this.result = result.data.summary
-                //     this.imageUrl = result.data.imageUrl
+                let speechResult = await this.$axios.post("/api/speech", {
+                    text: this.result
+                })
+                //result 에 있는 mp3 파일을 재생
+                var audio = new Audio(speechResult.data.audioUrl);
+                audio.play();
+
             }
 
             // console.log(result)
